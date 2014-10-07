@@ -4,7 +4,7 @@ wp-cn-excerpt
 wordpress中文摘要插件： [WP CN Excerpt](https://wordpress.org/plugins/cn-excerpt/)
 
 ## 后台设置界面
-![wp-cn-excerpt](http://mystorage.qiniudn.com/wp-cn-excerpt.jpg =x500)
+![wp-cn-excerpt](http://mystorage.qiniudn.com/wp-cn-excerpt.jpg)
 
 
 # 安装
