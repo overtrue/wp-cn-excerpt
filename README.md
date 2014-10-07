@@ -9,7 +9,7 @@ wordpress中文摘要插件： [WP CN Excerpt](https://wordpress.org/plugins/cn-
 
 # 安装
 1. WordPress后台搜索`WP CN Excerpt` 安装;
-2. 下载zip包解压到`wp-content/plugins`目录,后台激活即可;
+2. [下载](https://github.com/overtrue/wp-cn-excerpt/releases)zip包解压到`wp-content/plugins`目录,后台激活即可;
 3. 使用git克隆然后后台激活：
 ```shell
 cd 你的博客目录/wp-content/plugins/
