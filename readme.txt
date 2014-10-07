@@ -1,20 +1,20 @@
 === WP CN Excerpt ===
-Contributors:Joychao
+Contributors: Carlos
 Tags: 中文摘要,摘要,chinese,cn,excerpt, advanced, post, posts, template, formatting
-Donate link: https://me.alipay.com/joychao
+Donate link: https://github.com/overtrue
 Requires at least: 3.2
-Tested up to: 3.9.2
-Stable tag:4.2.8
+Tested up to: 4.0
+Stable tag:4.3.0
 
 
 == Description ==
 
- WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示,基于Advance Excerpt修改.
+ WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示。
 
 <ul>
  <li>在摘要中支持HTML标签的显示；</li>
- <li>可选the_excerpt和the_content时摘要显示；</li>
  <li>自动裁剪的摘要功能；</li>
+ <li>优化算法，让截取结果更易读；</li>
  <li>可以自己定制摘要的长度和省略号的显示；</li>
  <li>"阅读全文" 标签会被自动的添加（可选）；</li>
  <li>摘要长度是真实的内容的长度（不包含HTML标签）；</li>
@@ -23,17 +23,21 @@ Stable tag:4.2.8
  </ul>
 
  <h4>设置:</h4>
- <p>"设置" > "中文摘要设置"</p>
+ <p>"控制面板" > "中文摘要设置"</p>
 
 == Installation ==
 1，下载插件上传到/wp-content/plugins/目录后台启用即可
 2，后台“插件”->“安装插件”->搜索框输入："wp cn experct"->安装启用即可
 
 == Changelog ==
-= 4.1.6=
-修正了默认主题下无法摘要的bug
+= 4.3.0=
+- 重构截取算法，更友好的结果
+- 重构大部分代码
+- bugfix
 
 = 4.1.7=
 添加可选the_excerpt显示摘要选项
 
- 
+= 4.1.6=
+修正了默认主题下无法摘要的bug
+

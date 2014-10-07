@@ -123,7 +123,10 @@ $plugin = get_plugin_data(__DIR__ . '/wp-cn-excerpt.php');
                 </td>
             </tr>
         </table>
-        <div style="height:100px; line-height:50px; font-size:16px;"><div>作者：<a  style="text-decoration:none;" href="http://weibo.com/joychaocc" target="_blank"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_32x32.png" style="vertical-align:-8px;"  />@安正超</a></div>
+        <div style="height:100px; line-height:50px; font-size:16px;">
+          <div>作者：<a  style="text-decoration:none;" href="http://weibo.com/joychaocc" target="_blank">@安正超 </a>
+            源码：<a href="https://github.com/overtrue/wp-cn-excerpt" target="_blank">overtrue/wp-cn-excerpt</a>
+            </div>
             <!-- Baidu Button BEGIN -->
             <div style="font-size:22px;height:50px; float:left; line-height:50px;">推荐给你的朋友们吧！</div>
             <div class="bdsharebuttonbox">
