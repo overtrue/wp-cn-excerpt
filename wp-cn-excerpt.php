@@ -3,7 +3,7 @@
 Plugin Name:WP CN Excerpt
 Plugin URI: http://wordpress.org/plugins/cn-excerpt/
 Description: WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示
-Version:4.3.3
+Version:4.3.4
 Author: Carlos
 Author URI: http://weibo.com/joychaocc
 */
@@ -361,6 +361,9 @@ class AdvancedCNExcerpt
         $ellipsis    = (get_magic_quotes_gpc() == 1) ? stripslashes($_POST[$this->name . '_ellipsis']) : $_POST[$this->name . '_ellipsis'];
         $readMore   = (get_magic_quotes_gpc() == 1) ? stripslashes($_POST[$this->name . '_read_more']) : $_POST[$this->name . '_read_more'];
         $allowedTags = array_unique((array)$_POST[$this->name . '_allowed_tags']);
+        if (in_array('_all', $allowedTags)) {
+            $allowedTags = array('_all');
+        }
 
         update_option($this->name . '_length', $maxLength);
         update_option($this->name . '_only_excerpt', $onlyExcerpt);
@@ -369,7 +372,7 @@ class AdvancedCNExcerpt
         update_option($this->name . '_ellipsis', $ellipsis);
         update_option($this->name . '_read_more', $readMore);
         update_option($this->name . '_add_link', $addLink);
-        update_option($this->name . '_allowedTags', $allowedTags);
+        update_option($this->name . '_allowed_tags', $allowedTags);
 
         $this->loadOptions();
 

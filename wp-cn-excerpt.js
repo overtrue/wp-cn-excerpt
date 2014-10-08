@@ -61,6 +61,14 @@ jQuery(function($)
         $('input[name="' + plugin_prefix + '_allowed_tags[]"]:gt(0)').attr('checked', 'checked');
     });
 
+    $('input[id^="tag"]').click(function(){
+        $('input[value="_all"]').attr('checked', false);
+    });
+
+    $('input[value="_all"]').click(function(){
+        $('input[id^="tag"]').attr('checked', false);
+    });
+
     // Uncheck all boxes
     $('#' + plugin_prefix + '_select_none').click(function(event)
     {

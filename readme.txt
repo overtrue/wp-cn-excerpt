@@ -4,7 +4,7 @@ Tags: 中文摘要,摘要,chinese,cn,excerpt, advanced, post, posts, template, f
 Donate link: https://github.com/overtrue
 Requires at least: 3.2
 Tested up to: 4.0
-Stable tag:4.3.3
+Stable tag:4.3.4
 
 
 == Description ==
