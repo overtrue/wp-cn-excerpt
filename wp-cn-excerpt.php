@@ -3,7 +3,7 @@
 Plugin Name:WP CN Excerpt
 Plugin URI: http://wordpress.org/plugins/cn-excerpt/
 Description: WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示
-Version:4.3.4
+Version:4.3.5
 Author: Carlos
 Author URI: http://weibo.com/joychaocc
 */
@@ -69,11 +69,12 @@ class AdvancedCNExcerpt
         remove_filter('get_the_content', 'wp_trim_excerpt');
 
         // Replace everything
-        remove_all_filters('get_the_content', 100);
-        remove_all_filters('excerpt_length', 100);
+        remove_all_filters('get_the_content');
+        remove_all_filters('get_the_excerpt');
+        remove_all_filters('excerpt_length');
 
-        add_filter('the_excerpt', array($this, 'filter'), 100);
-        add_filter('the_content', array($this, 'filter'), 100);
+        add_filter('the_excerpt', array($this, 'filter'), 99999999);
+        add_filter('the_content', array($this, 'filter'), 99999999);
     }
 
     /**
@@ -173,7 +174,7 @@ class AdvancedCNExcerpt
      */
     public function pageScript()
     {
-        wp_enqueue_script($this->name . '_script', WP_PLUGIN_URL . '/wp-cn-excerpt/wp-cn-excerpt.js', array('jquery'));
+        wp_enqueue_script($this->name . '_script', plugins_url('/cn-excerpt/wp-cn-excerpt.js'), array('jquery'));
     }
 
     /**
@@ -269,7 +270,7 @@ class AdvancedCNExcerpt
 
                 if ($subLength > 0) {
                     //结束如果带^\.。\p{Han}？”"；;以外的字符会比较难看
-                    $token = preg_replace('/[^\.。\p{Han}？”"；;]\s*$/u', '', $token);
+                    $token = preg_replace('/[^\.。\p{Han}？”"；;]$/u', '', $token);
                     $out .= $this->msubstr($token, 0, $subLength, 'utf-8', $overLength ? $ellipsis : '');
                 }
 
@@ -287,7 +288,7 @@ class AdvancedCNExcerpt
             empty($matches[1]) || $lastTagName = $matches[1];
         }
 
-        return $out;
+        return force_balance_tags($out);
     }
 
     /**
