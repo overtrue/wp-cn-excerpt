@@ -3,7 +3,7 @@
 Plugin Name:WP CN Excerpt
 Plugin URI: http://wordpress.org/plugins/cn-excerpt/
 Description: WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示
-Version:4.3.5
+Version:4.3.6
 Author: Carlos
 Author URI: http://weibo.com/joychaocc
 */
@@ -164,7 +164,7 @@ class AdvancedCNExcerpt
      */
     public function pageOptions()
     {
-        include __DIR__ . '/wp-cn-excerpt-options.php';
+        include dirname() . '/wp-cn-excerpt-options.php';
     }
 
     /**
