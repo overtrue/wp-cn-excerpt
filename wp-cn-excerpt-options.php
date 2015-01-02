@@ -15,6 +15,7 @@ $plugin = get_plugin_data(__DIR__ . '/wp-cn-excerpt.php');
 ?>
 <div class="wrap" style=" font-family:Microsoft YaHei; ">
     <h2><span class=" dashicons-before dashicons-admin-page"></span><?php echo __("中文摘要设置 v", $this->textDomain) . $plugin['Version']; ?></h2>
+
     <form method="post" action="">
     <?php
       if (function_exists('wp_nonce_field'))
