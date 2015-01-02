@@ -3,8 +3,8 @@
 Plugin Name:WP CN Excerpt
 Plugin URI: http://wordpress.org/plugins/cn-excerpt/
 Description: WordPress高级摘要插件。支持在后台设置摘要长度，摘要最后的显示字符，以及允许哪些html标记在摘要中显示
-Version:4.3.7
-Author: Carlos
+Version:4.4.0
+Author: overtrue
 Author URI: http://weibo.com/joychaocc
 */
 class AdvancedCNExcerpt
@@ -18,7 +18,7 @@ class AdvancedCNExcerpt
         'no_shortcode'    => 1,
         'finish_sentence' => 0,
         'ellipsis'        => '...',
-        'read_more'       => '阅读全文',
+        'read_more_tpl'   => '<a href=":url" class="read-more">阅读全文</a>',
         'add_link'        => 1,
         'allowed_tags'    => array('_all'),
     );
@@ -44,7 +44,7 @@ class AdvancedCNExcerpt
     private static $instance = NULL;
 
 
-    public static function Instance($new = FALSE)
+    public static function instance($new = FALSE)
     {
         if (self::$instance == NULL || $new) {
             self::$instance = new AdvancedCNExcerpt();
@@ -54,16 +54,16 @@ class AdvancedCNExcerpt
 
     private function __construct()
     {
-        $this->name       = strtolower(get_class());
+        $this->name       = 'wp-cn-excerpt';
         $this->textDomain = $this->name;
         $this->loadOptions();
 
-        load_plugin_textdomain($this->textDomain, FALSE, dirname(plugin_basename(__FILE__)));
+        load_plugin_textdomain($this->textDomain, false, dirname(plugin_basename(__FILE__ )) . '/lang');
 
         register_activation_hook(__FILE__, array($this, 'install'));
 
         //register_deactivation_hook($file, array($this, 'uninstall'));
-        add_action('admin_menu', array($this, 'addAdminPages'));
+        add_action('admin_menu', array($this, 'adminPage'));
 
         // Replace the default filter (see /wp-includes/default-filters.php)
         remove_filter('get_the_content', 'wp_trim_excerpt');
@@ -89,10 +89,12 @@ class AdvancedCNExcerpt
         if (is_single() || is_page() || is_singular()) {
             return $text;
         }
-	if (!get_post()) {
-	    return false;
-	}
-	$text = get_post()->post_content();
+
+        if (!$post = get_post()) {
+      	    return false;
+      	}
+
+	      $text = $post->post_content;
         $allowedTags = $this->options['allowed_tags'];
         $text = force_balance_tags($text);
 
@@ -125,13 +127,13 @@ class AdvancedCNExcerpt
         }
 
         // Create the excerpt
-        $text = $this->getExcerpt($text,
+        $text = $this->excerpt($text,
             $this->options['length'],
             $this->options['finish_sentence'],
             $this->options['ellipsis']);
 
         // Add the ellipsis or link
-        $this->options['add_link'] && $text = $this->addReadMore($text, $this->options['read_more']);
+        $this->options['add_link'] && $text = $this->readmore($text, $this->options['read_more_tpl']);
 
         return $text;
     }
@@ -165,7 +167,7 @@ class AdvancedCNExcerpt
      *
      * @return string
      */
-    public function pageOptions()
+    public function optionPage()
     {
         include dirname(__FILE__) . '/wp-cn-excerpt-options.php';
     }
@@ -183,17 +185,17 @@ class AdvancedCNExcerpt
     /**
      * add the admin page.
      */
-    public function addAdminPages()
+    public function adminPage()
     {
 
         $optionsPage = add_utility_page(__("中文摘要设置", $this->textDomain),
-        __("中文摘要设置", $this->textDomain), 'manage_options', 'options-' . $this->name, array($this,'pageOptions'));
+        __("中文摘要设置", $this->textDomain), 'manage_options', 'options-' . $this->name, array($this,'optionPage'));
 
         // Scripts
         add_action('admin_print_scripts-' . $optionsPage, array($this,'pageScript'));
 
         //setting menu
-        add_filter('plugin_action_links', array($this,'addPluginLinks'), 10, 2);
+        add_filter('plugin_action_links', array($this,'pluginLinks'), 10, 2);
     }
 
     /**
@@ -204,7 +206,7 @@ class AdvancedCNExcerpt
      *
      * @return array
      */
-    public function addPluginLinks($links, $file)
+    public function pluginLinks($links, $file)
     {
         if ($file == plugin_basename(__FILE__)) {
             array_unshift($links, '<a href="options-general.php?page=options-' . $this->name.'">'.__('设置').'</a>');
@@ -223,7 +225,7 @@ class AdvancedCNExcerpt
      *
      * @return string.
      */
-    protected function getExcerpt($text, $maxLength, $finishSentence, $ellipsis)
+    protected function excerpt($text, $maxLength, $finishSentence, $ellipsis)
     {
         $tokens      = array();
         $out         = '';
@@ -328,11 +330,18 @@ class AdvancedCNExcerpt
      *
      * @return string.
      */
-    protected function addReadMore($text, $readMoreText)
+    protected function readmore($text, $tpl = '')
     {
-        !empty($readMoreText) || $readMoreText = '阅读全文';
+        !empty($tpl) || $tpl = '<a href=":url" class="read-more">:label</a>';
+
+        $tpl = $tpl;
+
+        $replace = array(
+            ':url'   => get_permalink(),
+        );
+
         // After the content
-        $text .= sprintf(' <a href="%s" class="read_more">%s</a>', get_permalink(), htmlspecialchars($readMoreText, ENT_COMPAT, 'UTF-8'));
+        $text .= str_replace(array_keys($replace), $replace, $tpl);
 
         return $text;
     }
@@ -363,7 +372,7 @@ class AdvancedCNExcerpt
         $addLink        = ('on' == $_POST[$this->name . '_add_link']) ? 1 : 0;
         // TODO: Drop magic quotes (deprecated in php 5.3)
         $ellipsis    = (get_magic_quotes_gpc() == 1) ? stripslashes($_POST[$this->name . '_ellipsis']) : $_POST[$this->name . '_ellipsis'];
-        $readMore   = (get_magic_quotes_gpc() == 1) ? stripslashes($_POST[$this->name . '_read_more']) : $_POST[$this->name . '_read_more'];
+        $readMoreTpl = $_POST[$this->name . '_read_more_tpl'];
         $allowedTags = array_unique((array)$_POST[$this->name . '_allowed_tags']);
         if (in_array('_all', $allowedTags)) {
             $allowedTags = array('_all');
@@ -374,17 +383,17 @@ class AdvancedCNExcerpt
         update_option($this->name . '_no_shortcode', $noShortcode);
         update_option($this->name . '_finish_sentence', $finishSentence);
         update_option($this->name . '_ellipsis', $ellipsis);
-        update_option($this->name . '_read_more', $readMore);
+        update_option($this->name . '_read_more_tpl', force_balance_tags(stripslashes($readMoreTpl)));
         update_option($this->name . '_add_link', $addLink);
         update_option($this->name . '_allowed_tags', $allowedTags);
 
         $this->loadOptions();
 
-        echo '<div id="message" class="updated fade"><p>设置已保存</p></div>';
+        echo '<div class="updated fade"><p>设置已保存</p></div>';
     }
 }// end of class
 
-AdvancedCNExcerpt::Instance();
+AdvancedCNExcerpt::instance();
 
 // Do not use outside the Loop!
 function the_advanced_excerpt($args = '', $get = FALSE)
@@ -409,7 +418,7 @@ function the_advanced_excerpt($args = '', $get = FALSE)
     }
 
     // Set temporary options
-    AdvancedExcerpt::Instance()->options = $args;
+    AdvancedExcerpt::instance()->options = $args;
 
     if ($get) {
       return get_the_content();

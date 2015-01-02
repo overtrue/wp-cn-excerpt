@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CN Excerpt\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-02 18:35+0800\n"
+"PO-Revision-Date: 2015-01-02 18:35+0800\n"
+"Last-Translator: Overtrue <anzhengchao@gmail.com>\n"
+"Language-Team: overtrue <anzhengchao@gmail.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-cn-excerpt-options.php:17
+msgid "中文摘要设置 v"
+msgstr "Wordpress CN Excerpt V"
+
+#: wp-cn-excerpt-options.php:27
+msgid "首段摘要"
+msgstr "First paragraph as summary"
+
+#: wp-cn-excerpt-options.php:32
+msgid "设置第一段为摘要，不按字数切割（条件为?。！!;”’,\"'等符号结束）"
+msgstr ""
+"Set the first paragraph is a summary, not by the word cut (condition !!;?. "
+"\"'\"' Symbols end)"
+
+#: wp-cn-excerpt-options.php:37
+msgid "摘要长度"
+msgstr "Summary length"
+
+#: wp-cn-excerpt-options.php:39
+msgid "个字符"
+msgstr "chars"
+
+#: wp-cn-excerpt-options.php:44
+msgid "省略符号"
+msgstr "Ellipsis"
+
+#: wp-cn-excerpt-options.php:51
+msgid "全文链接"
+msgstr "Read more link"
+
+#: wp-cn-excerpt-options.php:53
+msgid "添加全文链接到摘要结尾"
+msgstr "Add a permalink to the summary at the end of"
+
+#: wp-cn-excerpt-options.php:55
+msgid "表示文章链接"
+msgstr "represents article link"
+
+#: wp-cn-excerpt-options.php:55
+msgid "实体符号列表"
+msgstr "Entity symbol list"
+
+#: wp-cn-excerpt-options.php:60
+msgid "过滤标签"
+msgstr "Exclusion tags"
+
+#: wp-cn-excerpt-options.php:63
+msgid "从摘要中移除短标签。(推荐)"
+msgstr "Remove tags from a short summary. (Recommended)"
+
+#: wp-cn-excerpt-options.php:67
+msgid "保留标签"
+msgstr "Retention tags"
+
+#: wp-cn-excerpt-options.php:73
+msgid "不移除任何标签"
+msgstr "Do not remove any tags"
+
+#: wp-cn-excerpt-options.php:125
+msgid "反馈问题"
+msgstr "Feedback"
+
+#: wp-cn-excerpt-options.php:172
+msgid "保存设置"
+msgstr "Save"
+
+#: wp-cn-excerpt.php:191 wp-cn-excerpt.php:192
+msgid "中文摘要设置"
+msgstr "Wordpress CN Excerpt"
+
+#: wp-cn-excerpt.php:212
+msgid "设置"
+msgstr "Setting"
