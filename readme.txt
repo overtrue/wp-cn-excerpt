@@ -26,7 +26,9 @@ Stable tag:4.3.7
  <p>"控制面板" > "中文摘要设置"</p>
 
 == Installation ==
+
 1，下载插件上传到/wp-content/plugins/目录后台启用即可
+
 2，后台“插件”->“安装插件”->搜索框输入："wp cn experct"->安装启用即可
 
 == Changelog ==
