@@ -94,7 +94,7 @@ class AdvancedCNExcerpt
       	    return false;
       	}
 
-	      $text = $post->post_content;
+	    $text = $post->post_content;
         $allowedTags = $this->options['allowed_tags'];
         $text = force_balance_tags($text);
 
