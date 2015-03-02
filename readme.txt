@@ -4,7 +4,7 @@ Tags: 中文摘要,摘要,chinese,cn,excerpt, advanced, post, posts, template, f
 Donate link: https://github.com/overtrue
 Requires at least: 3.2
 Tested up to: 4.1
-Stable tag:4.3.7
+Stable tag:4.4.1
 
 
 == Description ==
@@ -32,6 +32,10 @@ Stable tag:4.3.7
 2，后台“插件”->“安装插件”->搜索框输入："wp cn experct"->安装启用即可
 
 == Changelog ==
+
+= 4.4.1 =
+
+- bugfix
 
 = 4.4.0 =
 
